@@ -29,6 +29,3 @@ init:
 # Виконати міграції
 migrate:
 	docker exec -it php-cli-review php yii migrate --interactive=0
-
-# Старт усього: init + build + migrate
-start: init up-build migrate

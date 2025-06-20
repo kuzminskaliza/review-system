@@ -1,5 +1,5 @@
 <?php
 return [
-    'origin_url' => 'http://localhost/',
+    'origin_url' => ['http://localhost/'],
     'access-token' => '',
 ];
