@@ -11,7 +11,7 @@ export default {
     const loadReviews = async (page = 1) => {
       try {
         const resp = await window.axios.get(apiBase, {
-          params: { status: 'pending', page }
+          params: { status: 'approved', page }
         });
         reviews.value = resp.data.items || resp.data;
         if (resp.data.meta) {

@@ -75,7 +75,7 @@ class ReviewController extends ActiveController
         $model = Yii::createObject(Review::class);
 
         if (!$model->load(Yii::$app->request->post(), '')) {
-            throw new Exception('щось тут не то');
+            throw new Exception('Не вдалося отримати дані з запиту.');
         }
 
         if (!$model->save()) {
@@ -101,7 +101,7 @@ class ReviewController extends ActiveController
         }
 
         if (!$model->load(Yii::$app->request->post(), '')) {
-            throw new Exception('щось тут не то');
+            throw new Exception('Не вдалося отримати дані з запиту.');
         }
 
         if ($model->save()) {
