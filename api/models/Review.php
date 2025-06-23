@@ -30,7 +30,7 @@ class Review extends ActiveRecord
     {
         return [
             [['author_name', 'text'], 'required'],
-            ['author_name', 'string', 'max' => 10],
+            ['author_name', 'string', 'max' => 255],
             ['text', 'string'],
             ['status', 'in', 'range' => [self::STATUS_PENDING, self::STATUS_APPROVED, self::STATUS_REJECTED]],
             ['status', 'default', 'value' => self::STATUS_PENDING],

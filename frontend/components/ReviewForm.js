@@ -73,7 +73,7 @@ export default {
         :disabled="sending"
       />
       <p v-if="validationErrors.author_name" class="error-message">
-      {{ validationErrors.author_name }}
+      {{ validationErrors.author_name[0] }}
       </p>
       <textarea
         v-model="text"
@@ -82,7 +82,7 @@ export default {
         :disabled="sending"
       ></textarea>
       <p v-if="validationErrors.text" class="error-message">
-      {{ validationErrors.text }}
+      {{ validationErrors.text[0] }}
       </p>
       <button
         type="submit"
