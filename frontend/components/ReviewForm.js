@@ -11,6 +11,7 @@ export default {
         const sending = ref(false);
         const message = ref('');
         const error = ref(false);
+        const validationErrors = ref({});
 
         const submitReview = async () => {
             if (!authorName.value.trim() || !text.value.trim()) {
@@ -31,13 +32,20 @@ export default {
 
                 message.value = 'Дякуємо! Відгук відправлено на модерацію.';
                 error.value = false;
+                validationErrors.value = {};
 
                 authorName.value = '';
                 text.value = '';
 
                 emit('submitted');
             } catch (err) {
-                message.value = 'Помилка при відправці відгуку.';
+                if (err.response && err.response.status === 422) {
+                    validationErrors.value = err.response.data;
+                    message.value = 'Помилка при відправці відгуку.';
+                } else {
+                    message.value = 'Помилка при відправці відгуку.';
+                }
+
                 error.value = true;
                 console.error(err);
             } finally {
@@ -52,6 +60,7 @@ export default {
             message,
             error,
             submitReview,
+            validationErrors,
         };
     },
 
@@ -63,14 +72,18 @@ export default {
         placeholder="Ім'я"
         :disabled="sending"
       />
-
+      <p v-if="validationErrors.author_name" class="error-message">
+      {{ validationErrors.author_name }}
+      </p>
       <textarea
         v-model="text"
         placeholder="Текст відгуку"
         rows="4"
         :disabled="sending"
       ></textarea>
-
+      <p v-if="validationErrors.text" class="error-message">
+      {{ validationErrors.text }}
+      </p>
       <button
         type="submit"
         :disabled="sending"

@@ -78,10 +78,12 @@ class ReviewController extends ActiveController
             throw new Exception('Не вдалося отримати дані з запиту.');
         }
 
-        if (!$model->save()) {
-            return $model;
+        if (!$model->validate()) {
+            Yii::$app->response->statusCode = 422;
+            return $model->getErrors();
         }
 
+        $model->save(false);
         return $model;
 
     }
