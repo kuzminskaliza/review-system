@@ -41,7 +41,7 @@ export default {
             } catch (err) {
                 if (err.response && err.response.status === 422) {
                     validationErrors.value = err.response.data;
-                    message.value = 'Помилка при відправці відгуку.';
+                    message.value = 'Валідація не пройдена.';
                 } else {
                     message.value = 'Помилка при відправці відгуку.';
                 }
